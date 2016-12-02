@@ -27,6 +27,6 @@ void Supervisor::setArray(){
 }
 string Supervisor::toString(){
 	stringstream ss;
-	ss<<name<<";"<<email<<";"<<password<<";"<<countDays<<";\n";
+	ss<<name<<";"<<email<<";"<<password<<";"<<countDays<<";";
 	return ss.str();
 }

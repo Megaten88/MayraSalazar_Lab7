@@ -27,6 +27,6 @@ void Intern::setArray(){
 }
 string Intern::toString(){
 	stringstream ss;
-	ss<<name<<";"<<email<<";"<<password<<";"<<workDays<<";\n";
+	ss<<name<<";"<<email<<";"<<password<<";"<<workDays<<";";
 	return ss.str();
 }

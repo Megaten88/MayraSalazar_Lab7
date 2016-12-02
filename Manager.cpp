@@ -27,6 +27,6 @@ void Manager::setArray(){
 }
 string Manager::toString(){
 	stringstream ss;
-	ss<<name<<";"<<email<<";"<<password<<";"<<salary<<";\n";
+	ss<<name<<";"<<email<<";"<<password<<";"<<salary<<";";
 	return ss.str();
 }
