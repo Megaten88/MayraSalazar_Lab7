@@ -136,22 +136,20 @@ void readInterns(){
 	interns.close();
 }
 void readSupervisors(){
-	string salario;
 	string name;
 	string correo;
 	string password;
-	ifstream managers;
-	managers.open("Managers.txt");
-	if(managers.fail()){
+	ifstream supervisors;
+	supervisors.open("Supervisors.txt");
+	if(supervisors.fail()){
 		cout<<"Falló el archivo."<<endl;
 	}else{
-		while(!managers.eof()){
-			getline(managers, name,';');
-			getline(managers, correo,';');
-			getline(managers, password,';');
-			getline(managers, salario,';');
-			users.push_back(new Manager(name,correo,password,atof(salario.c_str())));
+		while(!supervisors.eof()){
+			getline(supervisors, name,';');
+			getline(supervisors, correo,';');
+			getline(supervisors, password,';');
+			users.push_back(new Supervisor(name,correo,password));
 		}
 	}
-	managers.close();
+	supervisors.close();
 }
