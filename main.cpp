@@ -6,12 +6,14 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <stdlib.h>
 using namespace std;
 
 Admin* admin = new Admin("Mayra","mayrasalazar@unitec.edu","mayrasalazar0210","10/5/1997");
 User* login;
 vector<User*>users;
 void writeFile();
+void readFile();
 int main(int argc, char const *argv[])
 {
 	users.push_back(new Manager("ewe", "holita@hola.com", "ewewewewewewwewe",22.5));
@@ -52,4 +54,7 @@ void writeFile(){
     managers.close();
 	interns.close();
 	supervisors.close();
+}
+void readFile(){
+
 }
