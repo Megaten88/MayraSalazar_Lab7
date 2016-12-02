@@ -27,6 +27,6 @@ void Admin::setArray(){
 }
 string Admin::toString(){
 	stringstream ss;
-	ss<<name<<" "<<email<<" "<<password<<" "<<date<<" ";
+	ss<<name<<";"<<email<<";"<<password<<";"<<date<<";";
 	return ss.str();
 }

@@ -13,9 +13,14 @@ Admin* admin = new Admin("Mayra","mayrasalazar@unitec.edu","mayrasalazar0210","1
 User* login;
 vector<User*>users;
 void writeFile();
-void readFile();
+void readAdmin();
+void readManagers();
 int main(int argc, char const *argv[])
 {
+	/*int opcion;
+	cout<<<"------LOG IN-------\n 1)Login\n 2)Logout\n Elija su opcion: \n";
+	cin>>opcion;
+	*/
 	users.push_back(new Manager("ewe", "holita@hola.com", "ewewewewewewwewe",22.5));
 	users.push_back(new Intern("nana","asja","mayrasal",3));
 	writeFile();
@@ -23,6 +28,7 @@ int main(int argc, char const *argv[])
 	    users.erase(users.begin() + i);
 	}
     users.clear();
+    
 	return 0;
 }
 void writeFile(){
@@ -49,12 +55,50 @@ void writeFile(){
     			supervisors<<users.at(i)->toString()<<endl;
     		}
     	}
+
     }
     administrador.close();
     managers.close();
 	interns.close();
 	supervisors.close();
 }
-void readFile(){
-
+void readAdmin(){
+	string fecha;
+	string name;
+	string correo;
+	string password;
+	ifstream admins;
+	admins.open("Administrador.txt");
+	if(admins.fail()){
+		cout<<"Falló el archivo."<<endl;
+	}else{
+		while(!admins.eof()){
+			getline(admins, name,';');
+			getline(admins, correo,';');
+			getline(admins, password,';');
+			getline(admins, fecha,';');
+			admin = new Admin(name,correo,password,fecha);
+		}
+	}
+	admins.close();
+}
+void readManagers(){
+	string salario;
+	string name;
+	string correo;
+	string password;
+	ifstream managers;
+	managers.open("Managers.txt");
+	if(managers.fail()){
+		cout<<"Falló el archivo."<<endl;
+	}else{
+		while(!managers.eof()){
+			getline(managers, name,';');
+			getline(managers, correo,';');
+			getline(managers, password,';');
+			getline(managers, salario,';');
+			users.push_back(new Manager(name,correo,password,atof(salario.c_str())));
+		}
+	}
+	managers.close();
 }
