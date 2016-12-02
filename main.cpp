@@ -14,7 +14,13 @@ vector<User*>users;
 void writeFile();
 int main(int argc, char const *argv[])
 {
-	
+	users.push_back(new Manager("ewe", "holita@hola.com", "ewewewewewewwewe",22.5));
+	users.push_back(new Intern("nana","asja","mayrasal",3));
+	writeFile();
+	for (int i = 0; i < users.size(); ++i){
+	    users.erase(users.begin() + i);
+	}
+    users.clear();
 	return 0;
 }
 void writeFile(){
