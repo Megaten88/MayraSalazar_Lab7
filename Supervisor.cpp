@@ -16,17 +16,17 @@ int Supervisor::getCountDays(){
 	return countDays;
 }
 Supervisor::~Supervisor(){
-	arrayPass = NULL;
+	delete arrayPass;
 }
 void Supervisor::setArray(){
 	arrayPass = new int[8];
 	for (int i = 0; i < 8; ++i)
 	{
-		arrayPass[i] = password.at(i):
+		arrayPass[i] = password.at(i);
 	}
 }
 string Supervisor::toString(){
 	stringstream ss;
-	ss<<name<<";"<<email<<";"<<password<<";"<<countDays";"<<endl;
+	ss<<name<<";"<<email<<";"<<password<<";"<<countDays<<";\n";
 	return ss.str();
 }

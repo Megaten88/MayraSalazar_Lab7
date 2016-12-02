@@ -5,10 +5,10 @@ using std::string;
 class Supervisor:public User
 {
 private:
-	int countDays = 0;
+	int countDays;
 public:
 	Supervisor(string, string, string);
-	void setCountDays()
+	void setCountDays();
 	int  getCountDays();
 	virtual~Supervisor();
 	virtual void setArray();

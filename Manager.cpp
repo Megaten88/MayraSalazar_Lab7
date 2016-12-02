@@ -10,7 +10,7 @@ Manager::Manager(string nombre, string correo, string contra, double salario):Us
 	setArray();
 }
 Manager::~Manager(){
-	arrayPass = NULL;
+	delete arrayPass;
 }
 void Manager::setSalary(double salario){
 	salary = salario;
@@ -22,11 +22,11 @@ void Manager::setArray(){
 	arrayPass = new int[16];
 	for (int i = 0; i < 16; ++i)
 	{
-		arrayPass[i] = password.at(i):
+		arrayPass[i] = password.at(i);
 	}
 }
 string Manager::toString(){
 	stringstream ss;
-	ss<<name<<";"<<email<<";"<<password<<";"<<salary";"<<endl;
+	ss<<name<<";"<<email<<";"<<password<<";"<<salary<<";\n";
 	return ss.str();
 }

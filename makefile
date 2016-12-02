@@ -1,5 +1,5 @@
-main: Admin.o Manager.o Intern.o Supervisor.o main.o
-	g++ Admin.o Manager.o Intern.o Supervisor.o main.o -o main
+main: User.o Admin.o Manager.o Intern.o Supervisor.o main.o
+	g++ User.o Admin.o Manager.o Intern.o Supervisor.o main.o -o main
 
 main.o: Admin.h Manager.h Intern.h Supervisor.h main.cpp
 	g++ -c main.cpp
@@ -15,6 +15,9 @@ Intern.o: Intern.h Intern.cpp User.h
 
 Supervisor.o: Supervisor.h Supervisor.cpp User.h
 	g++ -c Supervisor.cpp
+
+User.o:	User.h User.cpp
+	g++ -c User.cpp
 
 clean:
 	rm -f *.o main

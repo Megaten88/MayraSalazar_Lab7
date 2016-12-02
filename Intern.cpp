@@ -16,17 +16,17 @@ int Intern::getWorkDays(){
 	return workDays;
 }
 Intern::~Intern(){
-	arrayPass = NULL;
+	delete arrayPass;
 }
 void Intern::setArray(){
 	arrayPass = new int[8];
 	for (int i = 0; i < 8; ++i)
 	{
-		arrayPass[i] = password.at(i):
+		arrayPass[i] = password.at(i);
 	}
 }
 string Intern::toString(){
 	stringstream ss;
-	ss<<name<<";"<<email<<";"<<password<<";"<<workDays";"<<endl;
+	ss<<name<<";"<<email<<";"<<password<<";"<<workDays<<";\n";
 	return ss.str();
 }

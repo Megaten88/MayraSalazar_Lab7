@@ -16,17 +16,17 @@ string Admin::getDate(){
 	return date;
 }
 Admin::~Admin(){
-	arrayPass = NULL;
+	delete arrayPass;
 }
-void setArray(){
+void Admin::setArray(){
 	arrayPass = new int[16];
 	for (int i = 0; i < 16; ++i)
 	{
-		arrayPass[i] = password.at(i):
+		arrayPass[i] = password.at(i);
 	}
 }
 string Admin::toString(){
 	stringstream ss;
-	ss<<name<<";"<<email<<";"<<password<<";"<<fecha";"<<endl;
+	ss<<name<<";"<<email<<";"<<password<<";"<<date<<";\n";
 	return ss.str();
 }

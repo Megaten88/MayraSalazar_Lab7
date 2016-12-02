@@ -25,3 +25,12 @@ void User::setPassword(string contra){
 string User::getPassword(){
 	return password;
 }
+void User::setArray(){
+
+}
+User::~User(){
+	delete arrayPass;
+}
+string User::toString(){
+
+}

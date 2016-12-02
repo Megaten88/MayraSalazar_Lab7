@@ -8,16 +8,16 @@ protected:
 	string name;
 	string email;
 	string password;
-	int[] arrayPass;
+	int* arrayPass;
 public:
 	User(string,string,string);
 	void setName(string);
 	string getName();
 	void setEmail(string);
 	string getEmail();
-	void setPassword(string) = 0;
+	void setPassword(string);
 	string getPassword();
-	virtual void setArray()=0;
+	virtual void setArray();
 	virtual ~User();
-	virtual string toString() = 0;
+	virtual string toString();
 };
