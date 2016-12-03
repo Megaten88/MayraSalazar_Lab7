@@ -126,6 +126,8 @@ int main(int argc, char const *argv[])
 						cout<<"Ingrese la posición: ";
 						cin>>pos;
 						users.erase(users.begin()+pos);
+					}else if(op ==3){
+						cout<<"Logout"<<endl;
 					}else{
 						cout<<"Ingresó una opción inválida."<<endl;
 					}
@@ -167,6 +169,8 @@ int main(int argc, char const *argv[])
 							}else{
 								cout<<"La contraseña no es válida."<<endl;
 							}
+						}else if(op==3){
+							cout<<"Logout"<<endl;
 						}else{
 							cout<<"Ingresó una opción inválida."<<endl;
 						}
@@ -247,11 +251,11 @@ int main(int argc, char const *argv[])
 			isSupervisor = false;
 		}else if(opcion ==2){
 			cout<<"Salió."<<endl;
-			return 1;
 		}else{
 			cout<<"Ingresó una opcion no válida."<<endl;
 		}
 	}
+	
 	writeFile();
     for (int i = 0; i < users.size(); ++i){
 	    users.erase(users.begin() + i);
