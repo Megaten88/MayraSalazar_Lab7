@@ -17,14 +17,11 @@ void readAdmin();
 void readManagers();
 void readInterns();
 void readSupervisors();
-void printUsers();
-void printEverything();
 int main(int argc, char const *argv[])
 {
-	readSupervisors();
+	/*readSupervisors();
 	readInterns();
-	readManagers();
-	readAdmin();
+	readManagers();*/
 	int opcion = 0;
 	while(opcion!=2){
 		cout<<"------LOG IN-------\n 1)Login\n 2)Salir del sistema \n Elija su opcion: \n";
@@ -44,7 +41,7 @@ int main(int argc, char const *argv[])
 			cin>>user;
 			cout<<"Ingrese contraseña: ";
 			cin>>contra;
-			if (user == admin->getName() && user == admin->getPassword())
+			if (user == admin->getName() && contra == admin->getPassword())
 			{
 				isAdmin = true;
 			}else{
@@ -79,10 +76,15 @@ int main(int argc, char const *argv[])
 							cout<<"Correo: "<<endl;
 							cin>>email;
 							cout<<"Contraseña: "<<endl;
-							cin>>password;	
-							cout<<"Salario: "<<endl;
-							cin>>salario;
-							users.push_back(new Manager(name,email,password,salario));
+							cin>>password;
+							if (password.length() == 16)
+							{
+								cout<<"Salario: "<<endl;
+								cin>>salario;
+								users.push_back(new Manager(name,email,password,salario));
+							}else{
+								cout<<"La contraseña no es válida."<<endl;
+							}
 						}else if (userIs == 2){
 							int dias;
 							cout<<"Nombre: "<<endl;
@@ -91,9 +93,14 @@ int main(int argc, char const *argv[])
 							cin>>email;
 							cout<<"Contraseña: "<<endl;
 							cin>>password;	
-							cout<<"Dias: "<<endl;
-							cin>>dias;
-							users.push_back(new Intern(name,email,password,dias));
+							if (password.length() == 8)
+							{
+								cout<<"Dias: "<<endl;
+								cin>>dias;
+								users.push_back(new Intern(name,email,password,dias));
+							}else{
+								cout<<"La contraseña no es válida."<<endl;
+							}
 						}else if(userIs == 3){
 							cout<<"Nombre: "<<endl;
 							cin>>name;
@@ -101,7 +108,12 @@ int main(int argc, char const *argv[])
 							cin>>email;
 							cout<<"Contraseña: "<<endl;
 							cin>>password;
-							users.push_back(new Supervisor(name,email,password));	
+							if (password.length() == 8)
+							{
+								users.push_back(new Supervisor(name,email,password));	
+							}else{
+								cout<<"La contraseña no es válida."<<endl;
+							}
 						}else{
 							cout<<"Ingresó una opción inválida."<<endl;
 						}
@@ -133,10 +145,15 @@ int main(int argc, char const *argv[])
 							cout<<"Correo: "<<endl;
 							cin>>email;
 							cout<<"Contraseña: "<<endl;
-							cin>>password;	
-							cout<<"Dias: "<<endl;
-							cin>>dias;
-							users.push_back(new Intern(name,email,password,dias));
+							cin>>password;
+							if (password.length() == 8)
+							{
+								cout<<"Dias: "<<endl;
+								cin>>dias;
+								users.push_back(new Intern(name,email,password,dias));
+							}else{
+								cout<<"La contraseña no es válida."<<endl;
+							}	
 						}else if(userIs == 2){
 							cout<<"Nombre: "<<endl;
 							cin>>name;
@@ -144,7 +161,12 @@ int main(int argc, char const *argv[])
 							cin>>email;
 							cout<<"Contraseña: "<<endl;
 							cin>>password;
-							users.push_back(new Supervisor(name,email,password));	
+							if (password.length() == 8)
+							{
+								users.push_back(new Supervisor(name,email,password));	
+							}else{
+								cout<<"La contraseña no es válida."<<endl;
+							}
 						}else{
 							cout<<"Ingresó una opción inválida."<<endl;
 						}
@@ -207,7 +229,7 @@ int main(int argc, char const *argv[])
 					if(op == 1){
 						for (int i = 0; i < users.size(); ++i)
 						{
-							cout<<i<<")"<<users.at(i)->toString();
+							cout<<i<<")"<<users.at(i)->toString()<<endl;
 						}
 					}else if(op == 2){
 						cout<<"Salió."<<endl;
@@ -229,8 +251,6 @@ int main(int argc, char const *argv[])
 		}else{
 			cout<<"Ingresó una opcion no válida."<<endl;
 		}
-		cout<<"------LOG IN-------\n 1)Login\n 2)Salir del sistema \n Elija su opcion: \n";
-		cin>>opcion;
 	}
 	writeFile();
     for (int i = 0; i < users.size(); ++i){
@@ -347,10 +367,4 @@ void readSupervisors(){
 		}
 	}
 	supervisors.close();
-}
-void printUsers(){
-
-}
-void printEverything(){
-
 }
