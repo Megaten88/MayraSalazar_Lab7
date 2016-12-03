@@ -19,9 +19,9 @@ void readInterns();
 void readSupervisors();
 int main(int argc, char const *argv[])
 {
-	/*readSupervisors();
+	readSupervisors();
 	readInterns();
-	readManagers();*/
+	readManagers();
 	int opcion = 0;
 	while(opcion!=2){
 		cout<<"------LOG IN-------\n 1)Login\n 2)Salir del sistema \n Elija su opcion: \n";
@@ -51,10 +51,19 @@ int main(int argc, char const *argv[])
 					{
 						if(dynamic_cast<Manager*> (users.at(i))!=NULL){
 	    					isManager = true;
+	    					isAdmin = false;
+	    					isIntern=false;
+	    					isSupervisor= false;
 			    		}else if(dynamic_cast<Intern*> (users.at(i))!=NULL){
-			    			isIntern = true;
+			    			isManager = false;
+	    					isAdmin = false;
+	    					isIntern=true;
+	    					isSupervisor= false;
 			    		}else if(dynamic_cast<Supervisor*> (users.at(i))!=NULL){
-			    			isSupervisor = true;
+			    			isManager = false;
+	    					isAdmin = false;
+	    					isIntern=false;
+	    					isSupervisor= true;
 			    		}
 					}
 				}
@@ -228,7 +237,7 @@ int main(int argc, char const *argv[])
 			}else if(isSupervisor){
 				int userIs;
 				while(op!= 2){
-					cout<<"1) Ver Usuarios Intern \n 2)Logout\n Elija una opción: ";
+					cout<<"1) Ver Usuarios \n 2)Logout\n Elija una opción: ";
 					cin>>op;
 					if(op == 1){
 						for (int i = 0; i < users.size(); ++i)
@@ -255,7 +264,6 @@ int main(int argc, char const *argv[])
 			cout<<"Ingresó una opcion no válida."<<endl;
 		}
 	}
-	
 	writeFile();
     for (int i = 0; i < users.size(); ++i){
 	    users.erase(users.begin() + i);
