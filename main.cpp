@@ -5,39 +5,234 @@
 #include "Supervisor.h"
 #include <vector>
 #include <iostream>
+#include <string>
 #include <fstream>
 #include <stdlib.h>
 using namespace std;
 
 Admin* admin = new Admin("Mayra","mayrasalazar@unitec.edu","mayrasalazar0210","10/5/1997");
-User* login;
 vector<User*>users;
 void writeFile();
 void readAdmin();
 void readManagers();
 void readInterns();
 void readSupervisors();
+void printUsers();
+void printEverything();
 int main(int argc, char const *argv[])
 {
-	/*int opcion;
-	cout<<<"------LOG IN-------\n 1)Login\n 2)Logout\n Elija su opcion: \n";
-	cin>>opcion;
-	*/
-	users.push_back(new Manager("ewe", "holita@hola.com", "ewewewewewewwewe",22.5));
-	users.push_back(new Manager("nana","asja","mayrasal44444444",3.5));
-	writeFile();
-	for (int i = 0; i < users.size(); ++i){
-	    users.erase(users.begin() + i);
+	readSupervisors();
+	readInterns();
+	readManagers();
+	readAdmin();
+	int opcion = 0;
+	while(opcion!=2){
+		cout<<"------LOG IN-------\n 1)Login\n 2)Salir del sistema \n Elija su opcion: \n";
+		cin>>opcion;
+		if (opcion==1)
+		{
+			string name;
+			string email;
+			string password;
+			string user;
+			string contra;
+			bool isAdmin;
+			bool isManager;
+			bool isIntern;
+			bool isSupervisor;
+			cout<<"Ingrese nombre de usuario: ";
+			cin>>user;
+			cout<<"Ingrese contraseña: ";
+			cin>>contra;
+			if (user == admin->getName() && user == admin->getPassword())
+			{
+				isAdmin = true;
+			}else{
+				for (int i = 0; i < users.size(); ++i)
+				{
+					if (user == users.at(i)->getName() && contra == users.at(i)->getPassword())
+					{
+						if(dynamic_cast<Manager*> (users.at(i))!=NULL){
+	    					isManager = true;
+			    		}else if(dynamic_cast<Intern*> (users.at(i))!=NULL){
+			    			isIntern = true;
+			    		}else if(dynamic_cast<Supervisor*> (users.at(i))!=NULL){
+			    			isSupervisor = true;
+			    		}
+					}
+				}
+			}
+			int op = 0;
+			if(isAdmin){
+				int userIs;
+				while(op!= 3){
+					cout<<"1) Agregar usuarios\n 2)Eliminar Usuarios\n 3)Logout\n Elija una opción: ";
+					cin>>op;
+					if(op == 1){
+						cout<<"\n1)Manager\n 2)Intern\n 3)Supervisor\n Elija su opción: "<<endl;
+						cin>>userIs;
+						if (userIs == 1)
+						{
+							double salario;
+							cout<<"Nombre: "<<endl;
+							cin>>name;
+							cout<<"Correo: "<<endl;
+							cin>>email;
+							cout<<"Contraseña: "<<endl;
+							cin>>password;	
+							cout<<"Salario: "<<endl;
+							cin>>salario;
+							users.push_back(new Manager(name,email,password,salario));
+						}else if (userIs == 2){
+							int dias;
+							cout<<"Nombre: "<<endl;
+							cin>>name;
+							cout<<"Correo: "<<endl;
+							cin>>email;
+							cout<<"Contraseña: "<<endl;
+							cin>>password;	
+							cout<<"Dias: "<<endl;
+							cin>>dias;
+							users.push_back(new Intern(name,email,password,dias));
+						}else if(userIs == 3){
+							cout<<"Nombre: "<<endl;
+							cin>>name;
+							cout<<"Correo: "<<endl;
+							cin>>email;
+							cout<<"Contraseña: "<<endl;
+							cin>>password;
+							users.push_back(new Supervisor(name,email,password));	
+						}else{
+							cout<<"Ingresó una opción inválida."<<endl;
+						}
+					}else if(op == 2){
+						int pos = 0;
+						for (int i = 0; i < users.size(); ++i)
+						{
+							cout<<i<<")"<<users.at(i)->getName()<<endl;
+						}
+						cout<<"Ingrese la posición: ";
+						cin>>pos;
+						users.erase(users.begin()+pos);
+					}else{
+						cout<<"Ingresó una opción inválida."<<endl;
+					}
+				}
+			}else if(isManager){
+				int userIs;
+				while(op!= 3){
+					cout<<"1) Agregar usuarios\n 2)Eliminar Usuarios\n 3)Logout\n Elija una opción: ";
+					cin>>op;
+					if(op == 1){
+						cout<<"\n1)Intern\n 2)Supervisor\n Elija su opción: "<<endl;
+						cin>>userIs;
+						if (userIs == 1){
+							int dias;
+							cout<<"Nombre: "<<endl;
+							cin>>name;
+							cout<<"Correo: "<<endl;
+							cin>>email;
+							cout<<"Contraseña: "<<endl;
+							cin>>password;	
+							cout<<"Dias: "<<endl;
+							cin>>dias;
+							users.push_back(new Intern(name,email,password,dias));
+						}else if(userIs == 2){
+							cout<<"Nombre: "<<endl;
+							cin>>name;
+							cout<<"Correo: "<<endl;
+							cin>>email;
+							cout<<"Contraseña: "<<endl;
+							cin>>password;
+							users.push_back(new Supervisor(name,email,password));	
+						}else{
+							cout<<"Ingresó una opción inválida."<<endl;
+						}
+					}else if(op == 2){
+						int pos = 0;
+						for (int i = 0; i < users.size(); ++i)
+						{
+							cout<<i<<")"<<users.at(i)->getName()<<endl;
+						}
+						cout<<"Ingrese la posición: ";
+						cin>>pos;
+						if (dynamic_cast<Manager*> (users.at(pos))!=NULL)
+						{
+							cout<<"No puede borrar un Manager."<<endl;
+						}else{
+							users.erase(users.begin()+pos);
+						}
+					}else{
+						cout<<"Ingresó una opción inválida."<<endl;
+					}
+				}
+			}else if(isIntern){
+				int userIs;
+				while(op!= 3){
+					cout<<"1) Ver Usuarios Intern \n 2)Eliminar Usuarios Intern \n 3)Logout\n Elija una opción: ";
+					cin>>op;
+					if(op == 1){
+						for (int i = 0; i < users.size(); ++i)
+						{
+							if (dynamic_cast<Intern*> (users.at(i))!=NULL)
+							{
+								cout<<i<<")"<<users.at(i)->getName()<<endl;
+							}
+						}
+					}else if(op == 2){
+						int pos = 0;
+						for (int i = 0; i < users.size(); ++i)
+						{
+							cout<<i<<")"<<users.at(i)->getName()<<endl;
+						}
+						cout<<"Ingrese la posición: ";
+						cin>>pos;
+						if (dynamic_cast<Manager*> (users.at(pos))!=NULL || dynamic_cast<Supervisor*> (users.at(pos))!=NULL)
+						{
+							cout<<"No puede borrar el user."<<endl;
+						}else{
+							users.erase(users.begin()+pos);
+						}
+					}else if(op ==3){
+						cout<<"Salió"<<endl;
+					}else{
+						cout<<"Ingresó una opción inválida."<<endl;
+					}
+				}
+			}else if(isSupervisor){
+				int userIs;
+				while(op!= 2){
+					cout<<"1) Ver Usuarios Intern \n 2)Logout\n Elija una opción: ";
+					cin>>op;
+					if(op == 1){
+						for (int i = 0; i < users.size(); ++i)
+						{
+							cout<<i<<")"<<users.at(i)->toString();
+						}
+					}else if(op == 2){
+						cout<<"Salió."<<endl;
+					}else{
+						cout<<"Ingresó una opción inválida."<<endl;
+					}
+				}
+			}else{
+				cout<<"No existe el user."<<endl;
+			}
+			op = 0;
+			isAdmin = false;
+			isManager = false;
+			isIntern = false;
+			isSupervisor = false;
+		}else if(opcion ==2){
+			cout<<"Salió."<<endl;
+			return 1;
+		}else{
+			cout<<"Ingresó una opcion no válida."<<endl;
+		}
+		cout<<"------LOG IN-------\n 1)Login\n 2)Salir del sistema \n Elija su opcion: \n";
+		cin>>opcion;
 	}
-    users.clear();
-    readAdmin();
-    readManagers();
-
-    for (int i = 0; i < users.size(); ++i)
-    {
-    	cout<<users.at(i)->toString()<<endl;
-    	cout<<users.at(i)->getName()<<endl;
-    }
+	writeFile();
     for (int i = 0; i < users.size(); ++i){
 	    users.erase(users.begin() + i);
 	}
@@ -152,4 +347,10 @@ void readSupervisors(){
 		}
 	}
 	supervisors.close();
+}
+void printUsers(){
+
+}
+void printEverything(){
+
 }
